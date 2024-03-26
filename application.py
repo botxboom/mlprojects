@@ -16,18 +16,17 @@ logger.setLevel(logging.DEBUG)
 
 
 application = Flask(__name__)
-app = application
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/home')
+@application.route('/home')
 def home():
     return render_template('home.html')
 
 
-@app.route('/predict_datapoint',methods = ['GET','POST'])
+@application.route('/predict_datapoint',methods = ['GET','POST'])
 def predict_datapoint():
     print(request.method)
     if request.method=='GET':
@@ -61,4 +60,4 @@ def predict_datapoint():
     
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0", debug=True)
+    application.run(host="0.0.0.0", debug=True)
