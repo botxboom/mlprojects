@@ -13,6 +13,22 @@ logger = logging.getLogger(__name__)
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 logger.setLevel(logging.DEBUG)
 
+import os
+from datetime import datetime
+
+LOG_FILE=f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+logs_path=os.path.join(os.getcwd(),"logs",LOG_FILE)
+os.makedirs(logs_path,exist_ok=True)
+
+LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
+
+logging.basicConfig(
+    filename=LOG_FILE_PATH,
+    format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+    )
+
+
 
 
 application = Flask(__name__)
@@ -33,7 +49,7 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         try:
-            logger.debug('Starting prediction...')
+            print("Starting Prediction...")
             data = CustomData(
             gender=request.form.get('gender'),
             race_ethnicity=request.form.get('ethnicity'),
@@ -53,7 +69,7 @@ def predict_datapoint():
             #print("after Prediction")
             return render_template('home.html',results=round(results[0],2))
         except Exception as e:
-            logger.debug(e)
+            print(e)
             
     
 
