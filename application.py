@@ -44,7 +44,7 @@ def home():
 
 @application.route('/predict_datapoint',methods = ['GET','POST'])
 def predict_datapoint():
-    print("GULSHAN")
+    print("gulshan")
     try:
         print("Starting Prediction...")
         data = CustomData(
