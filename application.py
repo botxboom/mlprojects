@@ -44,10 +44,7 @@ def home():
 
 @application.route('/predict_datapoint',methods = ['GET','POST'])
 def predict_datapoint():
-    print(request.method)
-    if request.method=='GET':
-        return render_template('home.html')
-    else:
+    print("GULSHAN")
         try:
             print("Starting Prediction...")
             data = CustomData(
@@ -69,6 +66,7 @@ def predict_datapoint():
             #print("after Prediction")
             return render_template('home.html',results=round(results[0],2))
         except Exception as e:
+            print("exception")
             print(e)
             
     
